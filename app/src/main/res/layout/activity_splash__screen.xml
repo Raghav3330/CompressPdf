@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ImageView
+        android:layout_width="126dp"
+        android:visibility="invisible"
+        android:layout_height="131dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/best_of_2017_illustration"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/award" />
+
+    <ImageView
+        android:id="@+id/ambience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha="0.8"
+        android:scaleType="center"
+        android:src="@drawable/ambience" />
+    <!--android:alpha="0.03"-->
+    <RelativeLayout
+        android:id="@+id/crash_app_force"
+        android:layout_centerInParent="true"
+        android:background="@drawable/circle"
+        android:layout_width="wrap_content"
+        android:padding="24dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/compress_pdf_logo1" />
+    </RelativeLayout>
+
+</RelativeLayout>

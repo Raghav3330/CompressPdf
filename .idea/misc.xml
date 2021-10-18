@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable-v24/rounded_black_confirmation.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/checkbox_drawable.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/compression_blue_gradient.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/helpscreen_text_bkg.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/history_rounded_corners.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/oval_bg.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/oval_bg_uninstaller.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/overlay_compressing_background.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/rounded_confirmation.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/rounded_corners.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/rounded_corners_confirmation.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/drawable/rounded_rectangle_gray.xml" value="0.13802083333333334" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/font/font.xml" value="0.27239583333333334" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/activity_award_test.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/activity_final_result.xml" value="0.16" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/activity_final_result_fail.xml" value="0.228125" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/activity_splash__screen.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/blank_row.xml" value="0.1" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/compress_pdf.xml" value="0.2" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/confirmation_popup.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/feedback_thank_you_card.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/final_result_layout.xml" value="0.136" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/final_screen_rate_card.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/finalscreen_compressed_app_hint.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/finalscreen_normal_hint_layout.xml" value="0.176" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/history_pdf.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/historypdf_row.xml" value="0.4" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/negative_feedback_layout.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/pdf_row.xml" value="0.4" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/positive_feedback_card.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/layout/share_app_card.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/menu/main_menu.xml" value="0.2421875" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Premium/AndroidStudioProjects/Compress/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.25833333333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

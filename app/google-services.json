@@ -1,0 +1,174 @@
+{
+  "project_info": {
+    "project_number": "473298859632",
+    "firebase_url": "https://fir-spaceup.firebaseio.com",
+    "project_id": "firebase-spaceup",
+    "storage_bucket": "firebase-spaceup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473298859632:android:82fd539b4737baae87e6b5",
+        "android_client_info": {
+          "package_name": "com.app.compress.pdf.stash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473298859632-ukhioetpfvg73k70vo0fpion2krvuh1q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.compress.pdf.stash",
+            "certificate_hash": "fcf436f57812d95ce79371898ac4890681a036f0"
+          }
+        },
+        {
+          "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdMUWygRTAPfOfdMKvZwwu2qXwiUY4yes"
+        },
+        {
+          "current_key": "AIzaSyB_zHzh_HbJuCmh7ojFWD7s9A2SOFTpOLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473298859632:android:cb1ff6beb2a57c5a87e6b5",
+        "android_client_info": {
+          "package_name": "com.app.uninstall.stash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473298859632-73lse1db6qhn4pp1oluuepj8pq01uion.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.uninstall.stash",
+            "certificate_hash": "fcf436f57812d95ce79371898ac4890681a036f0"
+          }
+        },
+        {
+          "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdMUWygRTAPfOfdMKvZwwu2qXwiUY4yes"
+        },
+        {
+          "current_key": "AIzaSyB_zHzh_HbJuCmh7ojFWD7s9A2SOFTpOLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-9668830280921241~4257788797"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473298859632:android:03578acb74427757",
+        "android_client_info": {
+          "package_name": "com.spaceup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473298859632-dmg80qenqvs16174hpi799sb7camfbtf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spaceup",
+            "certificate_hash": "bf64a53e5f61f48febcc67338a56864ca9366e6c"
+          }
+        },
+        {
+          "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdMUWygRTAPfOfdMKvZwwu2qXwiUY4yes"
+        },
+        {
+          "current_key": "AIzaSyB_zHzh_HbJuCmh7ojFWD7s9A2SOFTpOLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-2918503545111313~6069384173"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473298859632:android:c8b24d7a27f7e75a",
+        "android_client_info": {
+          "package_name": "com.stash.junkcleaner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473298859632-uf1d74jgaemt632cl8j5pbjhg4i209bj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stash.junkcleaner",
+            "certificate_hash": "bf64a53e5f61f48febcc67338a56864ca9366e6c"
+          }
+        },
+        {
+          "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdMUWygRTAPfOfdMKvZwwu2qXwiUY4yes"
+        },
+        {
+          "current_key": "AIzaSyB_zHzh_HbJuCmh7ojFWD7s9A2SOFTpOLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473298859632-h7c6plfctap76p64lruiom0se7tcpdon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-9668830280921241~6768451423"
+    }
+  ],
+  "configuration_version": "1"
+}

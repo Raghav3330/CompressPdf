@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#cc000000</color>
+    <color name="colorGrey">#4b000000</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="app_gray">#F3F5F7</color>
+    <color name="app_text_color">#1f4070</color>
+    <color name="app_green_color">#23c795</color>
+    <color name="app_text_color_material">#8a000000</color>
+
+
+    <!--REVIEW BUTTON COLOR-->
+
+    <!--TODO TO BE MADE FINAL-->
+
+
+    <!-- dots inactive colors -->
+
+    <!-- dots active colors -->
+
+
+    <!--Space App-->
+
+
+    <color name="statusbar">#000000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <!--gradient color-->
+
+
+    <color name="backdrop">#66232222</color>
+    <color name="spaceup_black">#b3000000</color>
+
+
+    <color name="blue">#2b99f1</color>
+    <color name="fortyBlack">#29000000</color>
+
+    <color name="white">#ffffff</color>
+    <color name="trans">#00ffffff</color>
+    <color name="black_66">#66000000</color>
+
+    <color name="share_blue">#2b99f1</color>
+    <color name="bubble_tag">#ff4949</color>
+    <color name="app_bar_color">#128c7e</color>
+    <color name="app_bar_color_dark">#118477</color>
+
+    <color name="material_white">#ffffff</color>
+    <color name="scan_more_highlight_color">#2b99f1</color>
+    <color name="unlock_unlimited_access_bkg">#0e7d70</color>
+    <color name="material_red">#ff6c6c</color>
+    <color name="material_red_top">#e25151</color>
+    <color name="material_green_top">#0b6c61</color>
+    <color name="material_green">#23c795</color>
+    <color name="post_activity_color_black">#171f1e</color>
+    <color name="colorOrange">#dc960d</color>
+    <color name="colorBlue">#4262d1</color>
+    <color name="finestBlack">#000000</color>
+
+</resources>

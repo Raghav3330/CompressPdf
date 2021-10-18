@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/rounded_confirmation"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_confirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/confirmText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="COMPRESS PDF"
+            android:fontFamily="@font/interextrabold"
+            android:textColor="@color/spaceup_black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/recommended"
+            android:layout_width="230dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/confirmText"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rectangle5"
+            android:text="  Recommended Compression "
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/confirmName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recommended"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/intersemibold"
+            android:gravity="center"
+            android:text="File Name"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirmName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corners_confirmation"
+            android:text="  compress now (watch ad)  "
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
