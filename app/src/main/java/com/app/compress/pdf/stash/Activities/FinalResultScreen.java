@@ -783,7 +783,7 @@ public class FinalResultScreen extends AppCompatActivity implements AppBarLayout
                     clickedShareCard = true;
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.app.compress.pdf.stash&referrer=utm_source%3Dshare%26utm_medium%3Dreferral%26utm_campaign%3Dapp%2520sharing");
-                    intent.setType("plain/text");
+                    intent.setType("text/plain");
                     FinalResultScreen.this.startActivity(Intent.createChooser(intent,"Help your friends save storage"));
                     break;
 

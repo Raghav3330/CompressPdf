@@ -601,11 +601,11 @@ public class Final_resultfail extends AppCompatActivity implements AppBarLayout.
 
                 case R.id.share_button:
 
-//                    clickedShareCard = true;
-//                    Intent intent = new Intent(Intent.ACTION_SEND);
-//                    intent.putExtra(Intent.EXTRA_TEXT, Constants.GOOGLE_PLAY_APP_URL);
-//                    intent.setType("plain/text");
-//                    FinalResultScreen.this.startActivity(Intent.createChooser(intent, getResources().getText(R.string.share_app)));
+                    clickedShareCard = true;
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.app.compress.pdf.stash&referrer=utm_source%3Dshare%26utm_medium%3Dreferral%26utm_campaign%3Dapp%2520sharing");
+                    intent.setType("text/plain");
+                    Final_resultfail.this.startActivity(Intent.createChooser(intent,"Help your friends save storage"));
                     break;
 
             }
