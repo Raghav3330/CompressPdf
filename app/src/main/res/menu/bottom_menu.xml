@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/compress_fragment"
+        android:icon="@drawable/ic_compress"
+        android:title="Compress" />
+    <item android:id="@+id/history_fragment"
+        android:icon="@drawable/ic_history"
+        android:title="History"/>
+</menu>

@@ -2,18 +2,21 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#0FFFFFFF">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/pdfImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="15dp"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="12dp"
@@ -29,7 +32,7 @@
             android:layout_marginEnd="25dp"
             android:layout_toRightOf="@id/pdfImage"
             android:fontFamily="@font/interblack"
-            android:text="PDF FILE  TITLE"
+            android:text="PDF FILE TITLE"
             android:fontWeight="500"
             android:textColor="@color/spaceup_black"
             android:textSize="12sp"
@@ -41,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/row_name"
             android:layout_marginTop="11dp"
-            android:layout_toRightOf="@id/pdfImage"
+            android:layout_toEndOf="@id/pdfImage"
             android:fontFamily="@font/interblack"
             android:text="20MB"
             android:textColor="@color/spaceup_black"
@@ -91,19 +94,16 @@
             android:layout_toRightOf="@id/row_date"
             android:fontFamily="@font/intermedium"
             android:text="@string/open"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
         <Button
             android:id="@+id/row_compressButton"
-            android:layout_width="76dp"
-            android:layout_height="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/frame5"
-            android:textColor="@color/white"
+            android:text="Compress"
+            android:layout_marginEnd="5dp"
             android:textSize="11sp"
             android:textStyle="bold" />
     </RelativeLayout>
