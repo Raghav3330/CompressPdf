@@ -1,0 +1,46 @@
+plugins {
+    id("com.android.application")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+}
+
+android {
+    namespace = "com.app.compress.pdf.stash"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.app.compress.pdf.stash"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 2
+        versionName = "1.1"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+}
+
+dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.play.core)
+    implementation(libs.itextpdf)
+
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.play.services.ads)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
+    implementation(libs.navigation.fragment)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.espresso.core)
+}

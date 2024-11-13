@@ -125,7 +125,7 @@ public class CompressFragment extends BaseContentFragment {
 
                                 SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
 
-                                pdf.setDate(String.valueOf(calendar.get(Calendar.DATE) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR) + " " +
+                                pdf.setDate(String.valueOf(calendar.get(Calendar.DATE) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR) + " " +
                                              timeFormat.format(calendar.getTime())));
                                 pdfArrayList.add(pdf);
 

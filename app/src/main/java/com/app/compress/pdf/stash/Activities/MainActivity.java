@@ -58,20 +58,35 @@ public class MainActivity extends AppCompatActivity {
         compressButton = findViewById(R.id.comPDFimage);
         historyButton = findViewById(R.id.comHistoryimage);
 
-        if (!checkPermission()) {
-            showPermissionDialog();
-        }else{
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!checkPermission()) {
+                    showPermissionDialog();
+                }else{
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frag_container, new CompressFragment());
                     fragmentTransaction.commit();
                     loadAd();
                 }
-            },5000);
-        }
+            }
+        },5000);
+
+//        if (!checkPermission()) {
+//            showPermissionDialog();
+//        }else{
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    FragmentManager fragmentManager = getSupportFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.frag_container, new CompressFragment());
+//                    fragmentTransaction.commit();
+//                    loadAd();
+//                }
+//            },5000);
+//        }
 
 //        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
 //                ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -103,14 +118,14 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.frag_container, new CompressFragment());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                loadAd();
+//                loadAd();
             } else if (view.getId() == R.id.comHistoryimage) {
                 compressButton.setBackgroundResource(R.drawable.compressdull);
                 historyButton.setBackgroundResource(R.drawable.historybright);
                 fragmentTransaction.replace(R.id.frag_container, new HistoryFragment());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                loadAd();
+//                loadAd();
             }
         }else{
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},1);

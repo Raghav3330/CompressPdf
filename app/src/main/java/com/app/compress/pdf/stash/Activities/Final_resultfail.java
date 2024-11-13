@@ -17,6 +17,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -41,6 +42,10 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
 import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.Task;
 
 public class Final_resultfail extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
@@ -73,13 +78,21 @@ public class Final_resultfail extends AppCompatActivity implements AppBarLayout.
     EditText negative_feedback_editText;
     private Toolbar mToolBar;
     private RewardedInterstitialAd mInterstitialAd;
+    private ReviewManager reviewManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_result_fail);
 
-        loadAd();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadAd();
+            }
+        },5000);
+
+        reviewManager = ReviewManagerFactory.create(this);
 
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(" PDF Compressed");
@@ -406,7 +419,7 @@ public class Final_resultfail extends AppCompatActivity implements AppBarLayout.
                         } else if (feedbackFlag == 1) {
                             return NEGATIVE_FEEDBACK_CARD;
                         } else if (feedbackFlag == 2) {
-                            return POSITIVE_FEEDBACK_CARD;
+//                            return POSITIVE_FEEDBACK_CARD;
                         } else if (feedbackFlag == 3) {
                             return FEEDBACK_THANK_YOU_CARD;
                         }
@@ -438,8 +451,13 @@ public class Final_resultfail extends AppCompatActivity implements AppBarLayout.
 
                 case R.id.positive:
 
-                    feedbackFlag = 2;
-                    notifyItemChanged(FEEDBACK_CARD);
+//                    feedbackFlag = 2;
+//                    notifyItemChanged(FEEDBACK_CARD);
+
+                    launchMarket();
+                    clickedRatingCard = true;
+                    notifyItemRemoved(2);
+                    notifyItemRangeChanged(0, size);
                     break;
                 case R.id.negative:
 
@@ -614,14 +632,29 @@ public class Final_resultfail extends AppCompatActivity implements AppBarLayout.
 
 
         private void launchMarket() {
-            Uri uri = Uri.parse("market://details?id=" + getPackageName());
-            Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
-            try {
-                startActivity(myAppLinkToMarket);
-            } catch (ActivityNotFoundException e) {
-                Log.d("FinalResultScreen", "play store redirection failed ");
-            }
+//            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+//            Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+//            try {
+//                startActivity(myAppLinkToMarket);
+//            } catch (ActivityNotFoundException e) {
+//                Log.d("FinalResultScreen", "play store redirection failed ");
+//            }
+
+            Task<ReviewInfo> request = reviewManager.requestReviewFlow();
+            request.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    // Getting the ReviewInfo object
+                    ReviewInfo reviewInfo = task.getResult();
+
+                    Task<Void> flow = reviewManager.launchReviewFlow(Final_resultfail.this, reviewInfo);
+                    flow.addOnCompleteListener(task1 -> {
+                        // The flow has finished. The API does not indicate whether the user
+                        // reviewed or not, or even whether the review dialog was shown.
+                    });
+                }
+            });
         }
+
 
         class AppHintAdvanceCard extends RecyclerView.ViewHolder {
 
