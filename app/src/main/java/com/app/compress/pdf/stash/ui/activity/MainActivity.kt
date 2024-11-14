@@ -42,72 +42,57 @@ import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoa
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import androidx.navigation.ui.NavigationUI;
+import com.app.compress.pdf.stash.databinding.ActivityMainBinding
 
 class MainActivity: AppCompatActivity() {
     private val REQUEST_CODE: Int = 1234
     private lateinit var mInterstitialAd: RewardedInterstitialAd
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-    private lateinit var bottomNavigationView: BottomNavigationView
+
+    private lateinit var binding: ActivityMainBinding
+
+    companion object{
+        var INSTANCE: MainActivity ?= null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        INSTANCE = this
+
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
 
-        bottomNavigationView = findViewById(R.id.bottom_nav_view);
-        bottomNavigationView.setupWithNavController(navController);
+        binding.bottomNavView.setupWithNavController(navController);
 
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        binding.bottomNavView.setOnItemSelectedListener { item ->
             if (item.itemId == R.id.compress_fragment) {
-                navController.popBackStack(R.id.compress_fragment,false)
-            }else if(item.itemId == R.id.history_fragment){
-                navController.navigate(R.id.history_fragment)
+                openCompressFragment()
+            } else if (item.itemId == R.id.history_fragment) {
+                openHistoryFragment()
             }
             true
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE)
-        }
-
-    }
-    private fun showPermissionDialog() {
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-
-            try {
-                val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(Uri.parse(String.format("package:%s",  objectListOf(getApplicationContext().getPackageName()))))
-                this.startActivityForResult(intent,34)
-            } catch (e: Exception) {
-                val intent =  Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivity(intent);
-
-            }
-
-        } else
-            ActivityCompat.requestPermissions(this,
-                listOf(WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE).toTypedArray(), 1);
     }
 
-    private fun checkPermission(): Boolean {
-        if (SDK_INT >= Build.VERSION_CODES.R) {
-            return Environment.isExternalStorageManager();
-        } else {
-            val write = ContextCompat.checkSelfPermission(getApplicationContext(),
-                    WRITE_EXTERNAL_STORAGE);
-            val read = ContextCompat.checkSelfPermission(getApplicationContext(),
-                    READ_EXTERNAL_STORAGE);
-
-            return write == PackageManager.PERMISSION_GRANTED &&
-                    read == PackageManager.PERMISSION_GRANTED;
-        }
+    fun openCompressFragment(){
+        navController.popBackStack(R.id.compress_fragment,false)
     }
 
+    fun openHistoryFragment(){
+        navController.navigate(R.id.history_fragment)
+    }
+
+    fun openFinalFragment(status: Boolean){
+        val bundle = Bundle()
+        bundle.putBoolean("status",status)
+//        navController.navigate(R.id.final_fragment,bundle)
+    }
 
 //    private void loadAd() {
 //        RewardedInterstitialAd.load(MainActivity.this, "ca-app-pub-9668830280921241/7627057702",

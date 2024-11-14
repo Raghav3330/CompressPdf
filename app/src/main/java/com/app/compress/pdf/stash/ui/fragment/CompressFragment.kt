@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.compress.pdf.stash.R
+import com.app.compress.pdf.stash.databinding.CompressPdfBinding
 import com.app.compress.pdf.stash.model.Pdf
 import com.app.compress.pdf.stash.ui.adapter.RecyclerViewAdapter
 import java.io.File
@@ -33,32 +34,32 @@ class CompressFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var recyclerViewAdapter: RecyclerViewAdapter? = null
 
+    private lateinit var binding: CompressPdfBinding
+
     private val pdfList = mutableListOf<Pdf>()
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.compress_pdf, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        binding = CompressPdfBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(context))
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
-            if(hasExternalStoragePermission()){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (hasExternalStoragePermission()) {
                 getAllPdf()
-            }else{
+            } else {
                 requestManageExternalStoragePermission()
             }
-        }else{
+        } else {
             requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-
 
 
 //        pdfArrayList = checkPdfs()
@@ -69,7 +70,7 @@ class CompressFragment : Fragment() {
         recyclerViewAdapter!!.notifyDataSetChanged()
     }
 
-//    private fun checkPdfs(): MutableList<Pdf>? {
+    //    private fun checkPdfs(): MutableList<Pdf>? {
 //        pdfArrayList!!.clear()
 //        val downloadsFolder = File(Environment.getExternalStorageDirectory().toString() + "//")
 //        Log.d("checkPdfs: ", downloadsFolder.toString())
@@ -79,7 +80,7 @@ class CompressFragment : Fragment() {
 //        Log.d("checkPdfs: ", downloadsFolder.toString())
 //        return pdfArrayList
 //    }
-    fun getAllPdf(){
+    private fun getAllPdf() {
 
         // URI for accessing the external storage files
         val uri: Uri = MediaStore.Files.getContentUri("external")
@@ -92,7 +93,7 @@ class CompressFragment : Fragment() {
             MediaStore.Files.FileColumns.DISPLAY_NAME, // PDF file name
             MediaStore.Files.FileColumns.SIZE,
             MediaStore.Files.FileColumns.DATE_MODIFIED
-            )
+        )
 
         // Filter for PDF files
         val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ?"
@@ -131,44 +132,58 @@ class CompressFragment : Fragment() {
                 //Log.d("PDF File", "Name: $name, Path: $data , File Uri : $fileUri ,Date : $date")
 
                 pdfList.add(
-                    Pdf(name,size,date,data.toString())
+                    Pdf(name, size, date, data.toString())
                 )
             }
         }
+
+        if(pdfList.isEmpty()){
+            binding.recyclerView.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
+            binding.loadingText.text = "No pdf's found"
+            binding.loadingText.visibility = View.VISIBLE
+        }else{
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.loadingText.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
+
+        }
+
     }
 
     private var requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){isGranted ->
-            if(isGranted){
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
                 getAllPdf()
-            }else{
-                Toast.makeText(requireContext(),"Permission rejected",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Permission rejected", Toast.LENGTH_SHORT).show()
             }
         }
 
     private var resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if(hasExternalStoragePermission()){
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (hasExternalStoragePermission()) {
                 getAllPdf()
-            }else{
-                Toast.makeText(requireContext(),"Permission rejected",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Permission rejected", Toast.LENGTH_SHORT).show()
             }
         }
 
-    private fun requestManageExternalStoragePermission(){
-        if(!hasExternalStoragePermission()){
-            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.R){
+    private fun requestManageExternalStoragePermission() {
+        if (!hasExternalStoragePermission()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
                 resultLauncher.launch(intent)
-            }else{
+            } else {
                 requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             }
         }
     }
+
     private fun hasExternalStoragePermission(): Boolean {
-        return if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.R){
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Environment.isExternalStorageManager()
-        }else{
+        } else {
             false
         }
     }

@@ -22,7 +22,7 @@ import java.util.Date
 class HistoryFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var pdfArrayList: MutableList<Pdf>? = null
-    private var recyclerViewAdapter: HistoryRecyclerViewAdapter? = null
+    private lateinit var recyclerViewAdapter: HistoryRecyclerViewAdapter
     private lateinit var textView: TextView
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,14 +38,16 @@ class HistoryFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.setLayoutManager(LinearLayoutManager(requireContext()))
         textView = view.findViewById(R.id.notFoundText)
+
         pdfArrayList = ArrayList()
         pdfArrayList = checkPdfs()
+
         recyclerViewAdapter = HistoryRecyclerViewAdapter(requireContext(), pdfArrayList!!)
         recyclerView.setAdapter(recyclerViewAdapter)
-        recyclerViewAdapter!!.notifyDataSetChanged()
+
         if (pdfArrayList!!.size <= 0) {
-            textView.setVisibility(View.VISIBLE)
-            recyclerView.setVisibility(View.INVISIBLE)
+            textView.visibility = View.VISIBLE
+            recyclerView.visibility = View.INVISIBLE
         }
     }
 
