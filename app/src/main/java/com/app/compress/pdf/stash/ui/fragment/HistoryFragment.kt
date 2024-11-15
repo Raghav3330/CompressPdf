@@ -72,7 +72,6 @@ class HistoryFragment : Fragment() {
                     //here you have that file.
                     if (file.path.endsWith("pdf")) {
                         val pdf = Pdf(
-                            0,
                             file.name,
                             file.length(),
                             file.lastModified(),
