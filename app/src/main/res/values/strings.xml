@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Compress PDF</string>
     <string name="open"><u>Open</u></string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="mode">Mode</string>
 </resources>

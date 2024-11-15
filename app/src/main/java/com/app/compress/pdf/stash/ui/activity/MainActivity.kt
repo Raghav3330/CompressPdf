@@ -25,6 +25,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,6 +62,10 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.clToolbar.toolbar)
+        // Disable the default title to prevent duplicate text
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.clToolbar.toolbarTitle.text = "Compress Pdf"
 
         INSTANCE = this
 
@@ -80,11 +86,22 @@ class MainActivity: AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
+
     fun openCompressFragment(){
+        binding.clToolbar.toolbarTitle.text = "Compress Pdf"
         navController.popBackStack(R.id.compress_fragment,false)
     }
 
     fun openHistoryFragment(){
+        binding.clToolbar.toolbarTitle.text = "History"
         navController.navigate(R.id.history_fragment)
     }
 

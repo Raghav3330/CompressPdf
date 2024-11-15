@@ -34,7 +34,7 @@
             android:fontFamily="@font/interblack"
             android:text="PDF FILE TITLE"
             android:fontWeight="500"
-            android:textColor="@color/spaceup_black"
+            android:textColor="?colorOnSurface"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
             android:layout_toEndOf="@id/pdfImage"
             android:fontFamily="@font/interblack"
             android:text="20MB"
-            android:textColor="@color/spaceup_black"
+            android:textColor="?colorOnSurface"
             android:textSize="10sp"
             android:textStyle="bold" />
 
@@ -59,6 +59,7 @@
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/row_size"
             android:text="|"
+            android:textColor="?colorOnSurface"
             android:textSize="15sp" />
 
         <TextView
@@ -72,6 +73,7 @@
             android:layout_toRightOf="@id/row_size"
             android:fontFamily="@font/intermedium"
             android:text="ENTER DATE"
+            android:textColor="?colorOnSurface"
             android:textSize="10sp" />
 
         <TextView
@@ -82,6 +84,7 @@
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/row_date"
             android:text="|"
+            android:textColor="?colorOnSurface"
             android:textSize="15sp" />
 
         <TextView
@@ -94,6 +97,7 @@
             android:layout_toRightOf="@id/row_date"
             android:fontFamily="@font/intermedium"
             android:text="@string/open"
+            android:textColor="?colorOnSurface"
             android:textSize="11sp" />
 
         <Button

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:background="#0FFFFFFF">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/pdfImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="15dp"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="12dp"
@@ -21,17 +25,16 @@
 
         <TextView
             android:id="@+id/row_name"
-            android:layout_width="243dp"
+            android:layout_width="211dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="25dp"
             android:layout_toRightOf="@id/pdfImage"
             android:fontFamily="@font/interblack"
+            android:text="PDF FILE TITLE"
             android:fontWeight="500"
-            android:textFontWeight="500"
-            android:text="PDF FILE  TITLE"
-            android:textColor="@color/spaceup_black"
+            android:textColor="?colorOnSurface"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -41,10 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/row_name"
             android:layout_marginTop="11dp"
-            android:layout_toRightOf="@id/pdfImage"
+            android:layout_toEndOf="@id/pdfImage"
             android:fontFamily="@font/interblack"
             android:text="20MB"
-            android:textColor="@color/spaceup_black"
+            android:textColor="?colorOnSurface"
             android:textSize="10sp"
             android:textStyle="bold" />
 
@@ -56,6 +59,7 @@
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/row_size"
             android:text="|"
+            android:textColor="?colorOnSurface"
             android:textSize="15sp" />
 
         <TextView
@@ -69,6 +73,7 @@
             android:layout_toRightOf="@id/row_size"
             android:fontFamily="@font/intermedium"
             android:text="ENTER DATE"
+            android:textColor="?colorOnSurface"
             android:textSize="10sp" />
 
         <TextView
@@ -79,6 +84,7 @@
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/row_date"
             android:text="|"
+            android:textColor="?colorOnSurface"
             android:textSize="15sp" />
 
         <TextView
@@ -91,19 +97,17 @@
             android:layout_toRightOf="@id/row_date"
             android:fontFamily="@font/intermedium"
             android:text="@string/open"
-            android:textSize="10sp" />
+            android:textColor="?colorOnSurface"
+            android:textSize="11sp" />
 
         <Button
             android:id="@+id/row_shareButton"
-            android:layout_width="63dp"
-            android:layout_height="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/frame6"
-            android:textColor="@color/spaceup_black"
+            android:text="Share"
+            android:layout_marginEnd="5dp"
             android:textSize="11sp"
             android:textStyle="bold" />
     </RelativeLayout>

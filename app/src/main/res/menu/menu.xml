@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_mode"
+        app:showAsAction="always"
+        app:actionLayout="@layout/menu_toggle_button"
+        android:title="Mode" />
+</menu>

@@ -141,7 +141,12 @@
     <color name="md_theme_surfaceContainerHigh_highContrast">#E7E8EE</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E2E2E9</color>
 
-
+    <color name="amber">#FFBF00</color>
+    <color name="phm_black_text">#4F4F4F</color>
+    <color name="grey_background">#CCCCCC</color>
+    <color name="phm_white_text">#F3F3F3</color>
+    <color name="detalight">#6DCCDD</color>
+    <color name="search_gray">#f9f3f3</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#cc000000</color>
     <color name="colorGrey">#4b000000</color>
@@ -181,4 +186,5 @@
     <color name="colorOrange">#dc960d</color>
     <color name="colorBlue">#4262d1</color>
     <color name="finestBlack">#000000</color>
+    <color name="teal_200">#24D3E3</color>
 </resources>

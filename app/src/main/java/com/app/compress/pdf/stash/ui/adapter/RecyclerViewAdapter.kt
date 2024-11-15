@@ -1,12 +1,9 @@
 package com.app.compress.pdf.stash.ui.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import android.graphics.Paint
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.compress.pdf.stash.model.Pdf
 import com.app.compress.pdf.stash.databinding.ConfirmationPopupBinding
 import com.app.compress.pdf.stash.databinding.PdfRowBinding
-import com.app.compress.pdf.stash.ui.activity.FinalResultScreen
-import com.app.compress.pdf.stash.ui.activity.Final_resultfail
 import com.app.compress.pdf.stash.ui.activity.MainActivity
 import com.app.compress.pdf.stash.util.FileUtils
 import com.google.android.gms.ads.AdError
@@ -28,7 +23,6 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.itextpdf.text.DocumentException
-import com.itextpdf.text.pdf.ColumnText
 import com.itextpdf.text.pdf.PRStream
 import com.itextpdf.text.pdf.PdfName
 import com.itextpdf.text.pdf.PdfNumber
@@ -41,7 +35,7 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
-class RecyclerViewAdapter(private val context: Context, private val pdfList: List<Pdf>) :
+class RecyclerViewAdapter(private val context: Context, private val pdfList: MutableList<Pdf>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private var dialogBuilder: AlertDialog.Builder? = null

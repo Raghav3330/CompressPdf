@@ -54,4 +54,28 @@ object FileUtils {
             Toast.makeText(context, "File not found", Toast.LENGTH_SHORT).show()
         }
     }
+    fun openCompressedPdfFile(context: Context, fileName: String) {
+        val file = File(context.filesDir,"/Compressed_pdf/$fileName")
+        if (file.exists()) {
+            val uri: Uri = FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.fileprovider",
+                file
+            )
+
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/pdf")
+                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NO_HISTORY
+            }
+
+            try {
+                context.startActivity(intent)
+            } catch (e: Exception) {
+                // Handle the case where no PDF viewer is installed
+                Toast.makeText(context, "No PDF viewer found", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(context, "File not found", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
