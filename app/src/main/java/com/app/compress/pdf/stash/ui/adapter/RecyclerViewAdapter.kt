@@ -66,9 +66,7 @@ class RecyclerViewAdapter(private val context: Context, private val pdfList: Mut
         }
     }
 
-    override fun getItemCount(): Int {
-        return pdfList.size
-    }
+    override fun getItemCount(): Int = pdfList.size
 
     inner class ViewHolder(pdfRowBinding: PdfRowBinding) : RecyclerView.ViewHolder(pdfRowBinding.root)
 
@@ -153,9 +151,10 @@ class RecyclerViewAdapter(private val context: Context, private val pdfList: Mut
         }
 
         // Split the filename and prepare the destination file
-        val pdfNameParts = pdf.filename.split(".")
-        if (pdfNameParts.size < 2) return // Ensure the filename has an extension
-        val compressedName = "${pdfNameParts[0]}-compressed.${pdfNameParts[1]}"
+        val lastIndex = pdf.filename.lastIndexOf('.')
+        val pdfNameParts = pdf.filename.substring(0,lastIndex)
+        val compressedName = "${pdfNameParts}-compressed.pdf"
+        val srcFilePath = pdf.filePath
         val destFile = File(outputDir, compressedName)
 
         try {

@@ -23,7 +23,7 @@ import com.app.compress.pdf.stash.ui.adapter.RecyclerViewAdapter
 
 class CompressFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    private var recyclerViewAdapter: RecyclerViewAdapter? = null
+    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
 
     private lateinit var binding: CompressPdfBinding
 
@@ -32,11 +32,6 @@ class CompressFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = CompressPdfBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
@@ -53,12 +48,14 @@ class CompressFragment : Fragment() {
         }
 
 
-//        pdfArrayList = checkPdfs()
         recyclerViewAdapter = RecyclerViewAdapter(requireContext(), pdfList)
+        recyclerViewAdapter.setHasStableIds(true)
         recyclerView.setAdapter(recyclerViewAdapter)
-        recyclerViewAdapter!!.notifyDataSetChanged()
+
+        return binding.root
     }
     private fun getAllPdf() {
+        pdfList.clear()
 
         // URI for accessing the external storage files
         val uri: Uri = MediaStore.Files.getContentUri("external")
@@ -110,7 +107,7 @@ class CompressFragment : Fragment() {
                 //Log.d("PDF File", "Name: $name, Path: $data , File Uri : $fileUri ,Date : $date")
 
                 pdfList.add(
-                    Pdf(name, size, date, data.toString())
+                    Pdf(id,name, size, date, data.toString())
                 )
             }
         }
