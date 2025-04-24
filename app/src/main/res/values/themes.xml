@@ -26,7 +26,7 @@
         <item name="colorOutlineVariant">@color/md_theme_outlineVariant</item>
         <item name="colorSurfaceInverse">@color/md_theme_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/md_theme_inverseOnSurface</item>
-        <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
+        <item name="colorPrimaryInverse">@color/blue</item>
         <item name="colorPrimaryFixed">@color/md_theme_primaryFixed</item>
         <item name="colorOnPrimaryFixed">@color/md_theme_onPrimaryFixed</item>
         <item name="colorPrimaryFixedDim">@color/md_theme_primaryFixedDim</item>
@@ -47,4 +47,36 @@
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
     </style>
+
+    <style name="BottomNavTextActive" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/interbold</item>
+    </style>
+
+    <style name="BottomNavTextInactive" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/intermedium</item>
+    </style>
+
+    <style name="CustomAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="textAppearanceHeadlineSmall">@style/CustomDialogTitle</item>
+    </style>
+
+    <style name="CustomDialogTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/interbold</item>
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
+
+    <style name="TextInputHintStyle" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/intersemibold</item>
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">@style/TextInputHintStyle</item>
+        <item name="boxBackgroundMode">outline</item>
+    </style>
+
 </resources>

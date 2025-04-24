@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     tools:context=".ui.activity.MainActivity">
 
     <include
@@ -25,13 +26,17 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
+        android:animateLayoutChanges="true"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu"
-        android:background="?colorOnTertiaryContainer"
-        app:itemIconTint="@drawable/bnv_state_change"
+        app:itemTextAppearanceActive="@style/BottomNavTextActive"
+        app:itemTextAppearanceInactive="@style/BottomNavTextInactive"
+        android:background="@drawable/helper_gradient"
+        app:itemIconTint="?colorOnSurface"
         app:labelVisibilityMode="selected"
-        app:itemTextColor="?colorPrimaryInverse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:itemTextColor="?colorOnSurface" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

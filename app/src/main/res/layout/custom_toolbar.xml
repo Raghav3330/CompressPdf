@@ -14,7 +14,7 @@
         android:ellipsize="end"
         android:fontFamily="@font/interextrabold"
         android:textColor="?colorOnSurface"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:elevation="4dp"
         android:gravity="center_vertical"

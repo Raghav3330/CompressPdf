@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:requestLegacyExternalStorage="true"
         android:icon="@drawable/compress_pdf_logo1"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/compress_pdf_logo1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".ui.activity.SplashActivity"
-            android:label="Compress PDF"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:taskAffinity=".Splash_Screen"
+            android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.MAIN" />
@@ -33,20 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.MainActivity"
-            android:exported="true" />
 
         <activity
-            android:name=".ui.activity.Final_resultfail"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ui.activity.FinalResultScreen"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:name="pdfviewer.ui.PdfViewerActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="pdfviewer.ui.PdfViewerActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -60,7 +48,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9668830280921241~3879384389"/>
+            android:value="ca-app-pub-9668830280921241~3879384389" />
     </application>
 
 </manifest>

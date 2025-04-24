@@ -1,135 +1,82 @@
 package com.app.compress.pdf.stash.ui.fragment
 
+import android.Manifest
 import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.app.compress.pdf.stash.databinding.CompressPdfBinding
+import com.app.compress.pdf.stash.data.CompressViewModel
+import com.app.compress.pdf.stash.data.CompressViewModelFactory
+import com.app.compress.pdf.stash.databinding.FragmentCompressBinding
 import com.app.compress.pdf.stash.model.Pdf
-import com.app.compress.pdf.stash.ui.adapter.RecyclerViewAdapter
-
+import com.app.compress.pdf.stash.ui.listener.OnNavigationClickListener
+import com.app.compress.pdf.stash.ui.adapter.CompressRecyclerViewAdapter
 
 class CompressFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
 
-    private lateinit var binding: CompressPdfBinding
-
+    private lateinit var binding: FragmentCompressBinding
+    private lateinit var compressRecyclerViewAdapter: CompressRecyclerViewAdapter
     private val pdfList = mutableListOf<Pdf>()
+
+    private val viewModel: CompressViewModel by viewModels {
+        CompressViewModelFactory(requireContext().applicationContext)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = CompressPdfBinding.inflate(layoutInflater)
-
-        recyclerView = binding.recyclerView
-        recyclerView.setHasFixedSize(true)
-        recyclerView.setLayoutManager(LinearLayoutManager(context))
+        binding = FragmentCompressBinding.inflate(inflater)
+        compressRecyclerViewAdapter = CompressRecyclerViewAdapter(requireContext(), pdfList,activity as OnNavigationClickListener,requireActivity())
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = compressRecyclerViewAdapter
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (hasExternalStoragePermission()) {
-                getAllPdf()
+                viewModel.fetchAllPdfFiles()
             } else {
                 requestManageExternalStoragePermission()
             }
         } else {
-            requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-
-
-        recyclerViewAdapter = RecyclerViewAdapter(requireContext(), pdfList)
-        recyclerViewAdapter.setHasStableIds(true)
-        recyclerView.setAdapter(recyclerViewAdapter)
-
         return binding.root
     }
-    private fun getAllPdf() {
-        pdfList.clear()
 
-        // URI for accessing the external storage files
-        val uri: Uri = MediaStore.Files.getContentUri("external")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // Columns to retrieve
-        val projection = arrayOf(
-            MediaStore.Files.FileColumns._ID, // PDF file name
-            MediaStore.Files.FileColumns.DATA, // File path (only for Android versions before scoped storage)
-            MediaStore.Files.FileColumns.MIME_TYPE, // PDF file name
-            MediaStore.Files.FileColumns.DISPLAY_NAME, // PDF file name
-            MediaStore.Files.FileColumns.SIZE,
-            MediaStore.Files.FileColumns.DATE_MODIFIED
-        )
+        Log.d("onViewcreated","onviewcreated")
 
-        // Filter for PDF files
-        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ?"
-        val selectionArgs = arrayOf("application/pdf")
+        viewModel.pdfList.observe(viewLifecycleOwner) { list ->
+            pdfList.clear()
+            pdfList.addAll(list)
+            compressRecyclerViewAdapter.notifyDataSetChanged()
 
-        // Sorting order to get the latest added files first
-        val sortOrder = "${MediaStore.Files.FileColumns.DATE_ADDED} DESC"
-
-        // Query the content resolver
-        val cursor: Cursor? = requireContext().contentResolver.query(
-            uri,
-            projection,
-            selection,
-            selectionArgs,
-            sortOrder
-        )
-
-        // Parse the results
-        cursor?.use {
-            val idColumn = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
-            val nameColumn = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
-            val dataColumn = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA)
-            val sizeColumn = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE)
-            val dateColumn = it.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)
-
-            while (it.moveToNext()) {
-                val id = it.getLong(idColumn)
-                val name = it.getString(nameColumn)
-                val data = it.getString(dataColumn) // Full file path
-                val size = it.getLong(sizeColumn)
-                val date = it.getLong(dateColumn)
-
-                //val fileUri = ContentUris.withAppendedId(MediaStore.Files.getContentUri("external"),id )
-
-                // Log the path or handle it
-                //Log.d("PDF File", "Name: $name, Path: $data , File Uri : $fileUri ,Date : $date")
-
-                pdfList.add(
-                    Pdf(id,name, size, date, data.toString())
-                )
+            binding.progressBar.visibility = View.GONE
+            if (list.isEmpty()) {
+                binding.recyclerView.visibility = View.GONE
+            } else {
+                binding.recyclerView.visibility = View.VISIBLE
             }
         }
-
-        if(pdfList.isEmpty()){
-            binding.recyclerView.visibility = View.GONE
-            binding.progressBar.visibility = View.GONE
-            binding.loadingText.text = "No pdf's found"
-            binding.loadingText.visibility = View.VISIBLE
-        }else{
-            binding.recyclerView.visibility = View.VISIBLE
-            binding.loadingText.visibility = View.GONE
-            binding.progressBar.visibility = View.GONE
-
-        }
-
     }
 
     private var requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                getAllPdf()
+                viewModel.fetchAllPdfFiles()
             } else {
                 Toast.makeText(requireContext(), "Permission rejected", Toast.LENGTH_SHORT).show()
             }
@@ -138,7 +85,7 @@ class CompressFragment : Fragment() {
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (hasExternalStoragePermission()) {
-                getAllPdf()
+                viewModel.fetchAllPdfFiles()
             } else {
                 Toast.makeText(requireContext(), "Permission rejected", Toast.LENGTH_SHORT).show()
             }

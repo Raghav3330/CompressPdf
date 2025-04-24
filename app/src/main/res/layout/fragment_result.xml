@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.ResultFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cv_file_details"
+            app:lottie_autoPlay="true" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_file_details"
+            app:cardCornerRadius="20dp"
+            android:layout_margin="15dp"
+            app:layout_constraintTop_toBottomOf="@id/animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Row with Success Icon and File Name -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/pdf"
+                        android:contentDescription="pdf" />
+
+                    <TextView
+                        android:id="@+id/textFileName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/interbold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Original Size -->
+                <TextView
+                    android:id="@+id/textOriginalSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intersemibold"
+                    android:text="Original: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Compressed Size -->
+                <TextView
+                    android:id="@+id/textCompressedSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Compressed: "
+                    android:textSize="16sp"
+                    android:fontFamily="@font/intersemibold"
+                    android:layout_marginTop="4dp" />
+
+                <!-- Compression Ratio -->
+                <TextView
+                    android:id="@+id/textCompressionRatio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/interbold"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Horizontal group for the three action buttons -->
+        <LinearLayout
+            android:id="@+id/ll_actions"
+            app:layout_constraintTop_toBottomOf="@id/cv_file_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_open"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Open"
+                android:backgroundTint="#3B62DE" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Share"
+                android:backgroundTint="#3B62DE" />
+        </LinearLayout>
+
+        <!-- Full-width button for compressing another PDF -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_compress_another"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_actions"
+            android:layout_margin="15dp"
+            android:text="Compress Another PDF"
+            android:backgroundTint="#3B62DE" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

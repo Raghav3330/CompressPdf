@@ -8,7 +8,12 @@ pluginManagement {
             }
         }
         mavenCentral()
-        maven{url = uri("https://jitpack.io")}
+        maven{
+            url = uri("https://jitpack.io")
+        }
+        maven {
+            url = uri("https://repo.itextsupport.com/android")
+        }
         gradlePluginPortal()
     }
 }
@@ -17,7 +22,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven{url = uri("https://jitpack.io")}
+        maven{
+            url = uri("https://jitpack.io")
+        }
+        maven {
+            url = uri("https://repo.itextsupport.com/android")
+        }
     }
 }
 
