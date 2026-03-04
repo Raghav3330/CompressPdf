@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.ParcelFileDescriptor
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -99,12 +100,13 @@ class PdfViewerActivity : AppCompatActivity() {
             }
 
 
-        }catch (e: Exception){
+        }catch (e: SecurityException){
             e.printStackTrace()
+            Log.d("Error",e.toString())
 
 //          Toast.makeText(this, "This PDF is password protected and cannot be opened.", Toast.LENGTH_LONG).show()
-
-            showPasswordDialog { password ->
+            if(e.message.toString().equals("password required or incorrect password"))
+                showPasswordDialog { password ->
                 val unlockedDoc = openPdfWithPassword(file, password)
                 if (unlockedDoc != null) {
                     // proceed with unlockedDoc

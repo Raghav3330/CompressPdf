@@ -17,6 +17,7 @@ import com.app.compress.pdf.stash.databinding.FragmentResultBinding
 import com.app.compress.pdf.stash.model.Pdf
 import com.app.compress.pdf.stash.util.FileUtils
 import com.google.gson.Gson
+import pdfviewer.ui.PdfViewerActivity
 import java.io.File
 import kotlin.math.roundToInt
 
@@ -58,7 +59,10 @@ class ResultFragment : Fragment() {
 
         binding.buttonOpen.setOnClickListener {
             if (compressedFile != null) {
-                FileUtils.openPdfFile(requireContext(), compressedFile.path)
+//                FileUtils.openPdfFile(requireContext(), compressedFile.path)
+                val intent = Intent(context, PdfViewerActivity::class.java)
+                intent.putExtra("pdf_path", compressedFile.path)
+                startActivity(intent)
             }
         }
 

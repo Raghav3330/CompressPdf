@@ -3,13 +3,18 @@ package com.app.compress.pdf.stash.ui.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.app.compress.pdf.stash.R
 import com.app.compress.pdf.stash.databinding.ConfirmationPopupBinding
+import com.app.compress.pdf.stash.databinding.DialogPdfPasswordBinding
 import com.app.compress.pdf.stash.databinding.PdfRowBinding
 import com.app.compress.pdf.stash.model.Pdf
 import com.app.compress.pdf.stash.ui.activity.MainActivity
@@ -23,6 +28,8 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.itextpdf.kernel.exceptions.BadPasswordException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,13 +37,18 @@ import kotlinx.coroutines.withContext
 import pdfviewer.ui.PdfViewerActivity
 import java.io.File
 
-//import com.itextpdf.text.DocumentException
-//import com.itextpdf.text.pdf.PRStream
-//import com.itextpdf.text.pdf.PdfName
-//import com.itextpdf.text.pdf.PdfNumber
-//import com.itextpdf.text.pdf.PdfReader
-//import com.itextpdf.text.pdf.PdfStamper
-//import com.itextpdf.text.pdf.parser.PdfImageObject
+import com.itextpdf.text.DocumentException
+import com.itextpdf.text.pdf.PRStream
+import com.itextpdf.text.pdf.PdfName
+import com.itextpdf.text.pdf.PdfNumber
+import com.itextpdf.text.pdf.PdfReader
+import com.itextpdf.text.pdf.PdfStamper
+import com.itextpdf.text.pdf.parser.PdfImageObject
+import com.tom_roush.pdfbox.pdmodel.PDDocument
+import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 class CompressRecyclerViewAdapter(
     private val context: Context,
@@ -167,20 +179,24 @@ class CompressRecyclerViewAdapter(
         val compressedName = "${pdfNameParts}-compressed.pdf"
         val srcFilePath = pdf.filePath
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val destFile = File(outputDir, compressedName)
-            println(getCompressedPDFPath(pdf.filePath, 50, 0.0, true, activity, destFile))
+        val destFile = File(outputDir, compressedName)
 
-            withContext(Dispatchers.Main){
-                // Check if the destination file exists
-                if (!destFile.exists()) {
-                    onNavigationClickListener.openResultFragment(false,null,null)
-                    Toast.makeText(context, "Something went wrong !", Toast.LENGTH_SHORT).show()
-                }else{
-                    onNavigationClickListener.openResultFragment(true, pdf, destFile)
-                }
-            }
-        }
+        tryOpenPdf(pdf, null, destFile)
+
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val destFile = File(outputDir, compressedName)
+//            println(getCompressedPDFPath(pdf.filePath, 50, 0.0, true, activity, destFile))
+//
+//            withContext(Dispatchers.Main){
+//                // Check if the destination file exists
+//                if (!destFile.exists()) {
+//                    onNavigationClickListener.openResultFragment(false,null,null)
+//                    Toast.makeText(context, "Something went wrong !", Toast.LENGTH_SHORT).show()
+//                }else{
+//                    onNavigationClickListener.openResultFragment(true, pdf, destFile)
+//                }
+//            }
+//        }
 
         /**
 //        try {
@@ -244,5 +260,134 @@ class CompressRecyclerViewAdapter(
 
         dialog?.dismiss()
 
+    }
+
+    private fun tryOpenPdf(pdf: Pdf, password: String?, destFile: File) {
+
+        try {
+
+            val pdfReader = if (password == null) {
+                PdfReader(pdf.filePath)
+            } else {
+                PdfReader(pdf.filePath, password.toByteArray())
+            }
+
+            compressPdf(pdfReader, destFile, pdf)
+
+        } catch (e: Exception) {
+
+            // If password was not provided → ask for it
+            if (password == null) {
+
+                showPasswordDialog { enteredPassword ->
+                    tryOpenPdf(pdf, enteredPassword, destFile)
+                }
+
+            } else {
+                Toast.makeText(context, "Wrong password", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun showPasswordDialog(onPasswordEntered: (String) -> Unit) {
+        val dialogPdfPasswordBinding = DialogPdfPasswordBinding.inflate(LayoutInflater.from(context))
+        val passwordLayout = dialogPdfPasswordBinding.passwordLayout
+        val passwordEditText = dialogPdfPasswordBinding.passwordEditText
+
+        val dialog = MaterialAlertDialogBuilder(context,R.style.CustomAlertDialogTheme)
+            .setTitle("Password required")
+            .setView(dialogPdfPasswordBinding.root)
+            .setCancelable(false)
+            .setPositiveButton("OK", null) // We override it later
+            .setNegativeButton("Cancel") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .create()
+
+        dialog.setOnShowListener {
+            val okButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            okButton.setOnClickListener {
+                val password = passwordEditText.text?.toString()
+                if (!password.isNullOrEmpty()) {
+                    onPasswordEntered(password)
+                    dialog.dismiss()
+                } else {
+                    passwordLayout.error = "Password cannot be empty"
+                }
+            }
+        }
+
+        dialog.show()
+
+    }
+
+
+    private fun compressPdf(pdfReader: PdfReader, destFile: File, pdf: Pdf) {
+
+        for (i in 1 until pdfReader.xrefSize) {
+            val pdfObject = pdfReader.getPdfObject(i)
+            if (pdfObject != null && pdfObject.isStream) {
+
+                val pRStream = pdfObject as PRStream
+                val subtype = pRStream.get(PdfName.SUBTYPE)
+
+                if (PdfName.IMAGE == subtype) {
+
+                    val imageBytes = PdfImageObject(pRStream).imageAsBytes
+                    val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                    bitmap?.let {
+
+                        val width = it.width
+                        val height = it.height
+
+                        val compressedBitmap =
+                            Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+
+                        Canvas(compressedBitmap).drawBitmap(it, 0f, 0f, null)
+
+                        val outputStream = ByteArrayOutputStream()
+                        compressedBitmap.compress(
+                            Bitmap.CompressFormat.JPEG,
+                            75,
+                            outputStream
+                        )
+
+                        pRStream.clear()
+                        pRStream.setData(
+                            outputStream.toByteArray(),
+                            false,
+                            PRStream.NO_COMPRESSION
+                        )
+
+                        pRStream.put(PdfName.TYPE, PdfName.XOBJECT)
+                        pRStream.put(PdfName.SUBTYPE, PdfName.IMAGE)
+                        pRStream.put(PdfName.FILTER, PdfName.DCTDECODE)
+                        pRStream.put(PdfName.WIDTH, PdfNumber(width))
+                        pRStream.put(PdfName.HEIGHT, PdfNumber(height))
+                        pRStream.put(PdfName.BITSPERCOMPONENT, PdfNumber(8))
+                        pRStream.put(PdfName.COLORSPACE, PdfName.DEVICERGB)
+
+                        it.recycle()
+                        compressedBitmap.recycle()
+                    }
+                }
+            }
+        }
+
+        pdfReader.removeUnusedObjects()
+
+        val pdfStamper = PdfStamper(pdfReader, FileOutputStream(destFile))
+        pdfStamper.setFullCompression()
+        pdfStamper.close()
+        pdfReader.close()
+
+        dialog?.dismiss()
+
+        if (destFile.exists()) {
+            onNavigationClickListener.openResultFragment(true, pdf, destFile)
+        } else {
+            onNavigationClickListener.openResultFragment(false, null, null)
+        }
     }
 }

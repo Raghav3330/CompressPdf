@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.gson)
     implementation(libs.play.core)
-//    implementation(libs.itextpdf)
+    implementation(libs.itextpdf)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
